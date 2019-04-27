@@ -115,6 +115,7 @@
 
 //Размер памяти обмена сервера - 31 регистр
 #define sizeofShareMem	31
+#define NULL_MAG_DELTA 319
 
 //===================Инициализация переменных=========================================
 unsigned int		// Содержание
@@ -644,7 +645,7 @@ void server_update(void)
 		if (SHd_state==false)							//если не известно текущее положение ШД
 			{
 			pattern_writer(0,18,home_text);				//записываем в буфер 18 символов <LM>DR>SD100>HM>MV с нулевого
-			strlen=smb_writer(18,dop_command);          //добавляем число шагов (число шагов = координате)
+			strlen=smb_writer(18,dop_command + NULL_MAG_DELTA); //добавляем число шагов (число шагов = координате)
 			pattern_writer(strlen,4,start_text);		//добавляем >FS>
 			smb_to_send=4+strlen;						//записываем в переменную итоговую длину буфера
 			SHd_position=dop_command;					//записываем текущую координату ШД
