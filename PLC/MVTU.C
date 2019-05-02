@@ -278,6 +278,7 @@ scan_init[13]=">RS>LL>SS0>AL",
 scan_speed[7]=">SD0>MV",
 scan_start[15]=">RS>JP5>JP2>FS>",
 home_text[18]="<LM>DR>SD100>HM>MV";
+home_first[33]="<LM>DR>SD100>HM>DL>MV120>DR>HM>MV";
 
 //---------------------------------------- переменные для пультовой петли ------------
 enum {ACTIV, PASSIV} dispetcher;		// диспетчер задач (вкл./выкл.)
@@ -644,7 +645,7 @@ void server_update(void)
 		q_com_tx.stt=START;								//активируем процесс отправки символов через COM-порт
 		if (SHd_state==false)							//если не известно текущее положение ШД
 			{
-			pattern_writer(0,18,home_text);				//записываем в буфер 18 символов <LM>DR>SD100>HM>MV с нулевого
+			pattern_writer(0,33,home_first);			//записываем в буфер 33 символов <LM>DR>SD100>HM>DL>MV120>DR>HM>MV с нулевогоы
 			strlen=smb_writer(18,dop_command + NULL_MAG_DELTA); //добавляем число шагов (число шагов = координате)
 			pattern_writer(strlen,4,start_text);		//добавляем >FS>
 			smb_to_send=4+strlen;						//записываем в переменную итоговую длину буфера
