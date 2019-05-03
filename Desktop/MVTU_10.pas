@@ -1825,6 +1825,7 @@ end;
 procedure Tfrmmain.shd_home_ButtonClick(Sender: TObject);
 begin
   cmd_word:=58;
+  pagecontrol1.Enabled:=false;
 end;
 //--------------------------------------- Кнопка заврешение работы программы ПЛК -----------------------------------
 
