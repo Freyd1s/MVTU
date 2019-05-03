@@ -1,6 +1,6 @@
 object frmmain: Tfrmmain
-  Left = 559
-  Top = 96
+  Left = 211
+  Top = 851
   Width = 1316
   Height = 858
   Caption = #1052#1042#1058#1059'_11-1'#1052#1057
@@ -20,7 +20,7 @@ object frmmain: Tfrmmain
     Top = 0
     Width = 1298
     Height = 818
-    ActivePage = TabSheet1
+    ActivePage = TabSheet2
     TabOrder = 2
     OnChange = PageControl1Change
     object TabSheet1: TTabSheet
@@ -789,7 +789,7 @@ object frmmain: Tfrmmain
         end
       end
       object Panel4: TPanel
-        Left = 355
+        Left = 360
         Top = 402
         Width = 545
         Height = 297
@@ -988,7 +988,7 @@ object frmmain: Tfrmmain
           end
           object Shd_move_Button: TButton
             Left = 142
-            Top = 28
+            Top = 44
             Width = 83
             Height = 25
             Caption = #1055#1077#1088#1077#1084#1077#1089#1090#1080#1090#1100
@@ -1182,7 +1182,7 @@ object frmmain: Tfrmmain
           end
         end
         object GroupBox7: TGroupBox
-          Left = 410
+          Left = 378
           Top = 8
           Width = 124
           Height = 145
@@ -1223,7 +1223,7 @@ object frmmain: Tfrmmain
           end
         end
         object GroupBox8: TGroupBox
-          Left = 153
+          Left = 137
           Top = 8
           Width = 233
           Height = 145
@@ -1468,6 +1468,15 @@ object frmmain: Tfrmmain
           Height = 21
           TabOrder = 4
         end
+      end
+      object Button7: TButton
+        Left = 776
+        Top = 584
+        Width = 113
+        Height = 25
+        Caption = #1053#1091#1083#1077#1074#1086#1077' '#1087#1086#1083#1086#1078#1077#1085#1080#1077
+        TabOrder = 3
+        OnClick = shd_home_ButtonClick
       end
     end
     object TabSheet3: TTabSheet
