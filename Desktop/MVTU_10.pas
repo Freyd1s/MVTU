@@ -178,6 +178,7 @@ type
     Label36: TLabel;
     Panel7: TPanel;
     Panel8: TPanel;
+    Button7: TButton;
     procedure readbuttonClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure valve1buttonClick(Sender: TObject);
@@ -224,6 +225,7 @@ type
     procedure pressureradiogroup2Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Timer_2ButtonClick(Sender: TObject);
+    procedure shd_home_ButtonClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -321,6 +323,7 @@ var
 //          55						?				Step_right_BtnClick			перемещение ШД на заданное число шагов по часовой
 //          56						?				Step_left_BtnClick			перемещение ШД на заданное число шагов против часовой
 //          57						?				Shd_scan_buttonClick		сканирующее движение ШД на заданном секторе
+//          58                    shd_home_ButtonClick    возврат в положение HOME
 //          100										PLC_close_ButtonClick		завершение работы программы
 //          10/20									Auto_vacuum_checkboxClick	вкл./выкл. автоматической откачки
 //          30/40									Auto_Produv_CheckBoxClick	вкл./выкл. автоматической продувки газовой линии
@@ -1819,6 +1822,12 @@ except
 	showmessage('Ошибка ввода параметра');
 end;
 end;
+//--------------------------------------- Кнопка возврата в положение HOME------------------------------------------
+procedure Tfrmmain.shd_home_ButtonClick(Sender: TObject);
+begin
+  cmd_word:=58;
+  pagecontrol1.Enabled:=false;
+end;
 //--------------------------------------- Кнопка заврешение работы программы ПЛК -----------------------------------
 
 procedure Tfrmmain.PLC_close_ButtonClick(Sender: TObject);
@@ -2075,5 +2084,4 @@ except
 	showmessage('Не удалось считать значение');
 end;
 end;
-
 end.	{------------------------------------------- Конец программы ----------------------------------------------}
