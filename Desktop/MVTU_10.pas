@@ -1647,8 +1647,29 @@ end;
 
 procedure Tfrmmain.servo2_buttonClick(Sender: TObject);						//задание положения сервопривода в градусах
 var
+x1,x2:integer;
 per:real;
 begin
+x1:=140+round(StrToInt(servo2_edit.Text)*120/90);
+x2:=140-round(StrToInt(servo2_edit.Text)*120/90);
+ if round(StrToInt(servo2_edit.Text))<5 then begin
+  x1:=144;
+  x2:=136;
+ end;
+ if round(StrToInt(servo2_edit.Text))>90 then begin
+  x1:=260;
+  x2:=20;
+ end;
+ image4.Canvas.pen.Width:=2;
+ image4.Canvas.Brush.Color:=RGB(240,240,240);
+ image4.Canvas.Pie(20,40,260,280,260,160,20,160);
+ image4.Canvas.Brush.Color:=RGB(177,187,187);
+ image4.Canvas.Pie(x2,40,x1,280,x1,160,x2,160);
+ image4.Canvas.MoveTo(140,40);
+ image4.Canvas.LineTo(140,160);
+ image4.Canvas.Brush.Color:=RGB(77,77,77);
+ image4.Canvas.Ellipse(120,100,160,140);
+end;
 try
 	per:=strtofloat(servo2_edit.Text);										//считываем значение, которое хочет установить пользователь
 	if per>120 then per:=120;												//ограничиваем максимумом в 120 гардусов
