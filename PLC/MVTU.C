@@ -648,7 +648,7 @@ void server_update(void)
 		if (SHd_state==false)							//если не известно текущее положение ШД
 			{
 			pattern_writer(0,33,home_first);			//записываем в буфер 33 символов <LM>DR>SD100>HM>DL>MV120>DR>HM>MV с нулевогоы
-			strlen=smb_writer(18,dop_command + NULL_MAG_DELTA); //добавляем число шагов (число шагов = координате)
+			strlen=smb_writer(33,dop_command + NULL_MAG_DELTA); //добавляем число шагов (число шагов = координате)
 			pattern_writer(strlen,4,start_text);		//добавляем >FS>
 			smb_to_send=4+strlen;						//записываем в переменную итоговую длину буфера
 			SHd_position=dop_command;					//записываем текущую координату ШД
@@ -727,7 +727,7 @@ void server_update(void)
 		q_com_tx.stt=START;			                    //активируем процесс отправки символов через COM-порт
 		pattern_writer(0,34,home_command);			//записываем в буфер 33 символов <LM>DR>SD100>HM>DL>MV120>DR>HM>FS> с нулевого
 	    smb_to_send=34;						//записываем в переменную итоговую длину буфера
-		SHd_position=dop_command;					//записываем текущую координату ШД
+		SHd_position=0;					    //записываем текущую координату ШД
 		SHd_state=TRUE;								//записываем, что положение ШД определено	
 	    {
 	break;
