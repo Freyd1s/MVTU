@@ -1650,16 +1650,22 @@ var
 x1,x2:integer;
 per:real;
 begin
-x1:=140+round(StrToInt(servo2_edit.Text)*120/90);
-x2:=140-round(StrToInt(servo2_edit.Text)*120/90);
- if round(StrToInt(servo2_edit.Text))<5 then begin
-  x1:=144;
-  x2:=136;
- end;
- if round(StrToInt(servo2_edit.Text))>90 then begin
-  x1:=260;
-  x2:=20;
- end;
+
+try
+	per:=strtofloat(servo2_edit.Text);             //считываем значение, которое хочет установить пользователь
+  x1:=140+round(per*120/90);
+  x2:=140-round(per*120/90);
+	if per>85 then  begin
+   per:=85;												//ограничиваем максимумом в 85 гардусов
+   x1:=144;                       //координаты для отрисовки крайнего положения
+   x2:=136;                       //координаты для отрисовки крайнего положения
+  end;
+	if per<0 then  begin
+   per:=0;												//ограничиваем минимумом 0 градусов
+   x1:=144;                       //координаты для отрисовки крайнего положения
+   x2:=136;                       //координаты для отрисовки крайнего положения
+  end;
+  //-------------отрисовка---------------
  image4.Canvas.pen.Width:=2;
  image4.Canvas.Brush.Color:=RGB(240,240,240);
  image4.Canvas.Pie(20,40,260,280,260,160,20,160);
@@ -1669,11 +1675,8 @@ x2:=140-round(StrToInt(servo2_edit.Text)*120/90);
  image4.Canvas.LineTo(140,160);
  image4.Canvas.Brush.Color:=RGB(77,77,77);
  image4.Canvas.Ellipse(120,100,160,140);
-end;
-try
-	per:=strtofloat(servo2_edit.Text);										//считываем значение, которое хочет установить пользователь
-	if per>120 then per:=120;												//ограничиваем максимумом в 120 гардусов
-	if per<0 then per:=0;													//ограничиваем минимумом 0 градусов
+//------------конец отрисовки------------
+
 	servo2_edit.text:=floattostr(per);										//выводим заданное значение на экран
 	per:=per/120*4379;														//перевод из градусов в 0..4379 мВ, значение подобрано
 	Dop_cmd:=round(per);													//и соответствует 0-960 дискрет для сервоконтроллера
