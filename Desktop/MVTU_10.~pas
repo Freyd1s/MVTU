@@ -701,16 +701,10 @@ begin
   drawflange(frmmain.Image2);											// рисуем фланец на 2 канве
   drawflange(frmmain.Image3);											// рисуем фланец на 3 канве
   piedraw(0);															// рисуем заслонку в 0 положении
-
- image4.Canvas.pen.Width:=2;
- image4.Canvas.Brush.Color:=RGB(240,240,240);
- image4.Canvas.Pie(20,40,260,280,260,160,20,160);
- image4.Canvas.Brush.Color:=RGB(177,187,187);
- image4.Canvas.Pie(136,40,144,280,144,160,136,160);
- image4.Canvas.MoveTo(140,40);
- image4.Canvas.LineTo(140,160);
- image4.Canvas.Brush.Color:=RGB(77,77,77);
- image4.Canvas.Ellipse(120,100,160,140);
+  
+   image4.Canvas.Pen.Width:=2;											// здесь будет рисование дросселирующей заслонки
+   image4.Canvas.Brush.Color:=RGB(200,191,231);							// на 4 канве
+   image4.canvas.Ellipse(20,20,260,260);	
   end;
 end;
 //--------------------------------------- прорисовка инидкации состояния вакуумных элементов -----------------------
