@@ -178,6 +178,7 @@ type
     Label36: TLabel;
     Panel7: TPanel;
     Panel8: TPanel;
+    Button7: TButton;
     procedure readbuttonClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure valve1buttonClick(Sender: TObject);
@@ -224,6 +225,7 @@ type
     procedure pressureradiogroup2Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Timer_2ButtonClick(Sender: TObject);
+    procedure shd_home_ButtonClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -321,6 +323,7 @@ var
 //          55						?				Step_right_BtnClick			перемещение Ўƒ на заданное число шагов по часовой
 //          56						?				Step_left_BtnClick			перемещение Ўƒ на заданное число шагов против часовой
 //          57						?				Shd_scan_buttonClick		сканирующее движение Ўƒ на заданном секторе
+//          58                    shd_home_ButtonClick    возврат в положение HOME
 //          100										PLC_close_ButtonClick		завершение работы программы
 //          10/20									Auto_vacuum_checkboxClick	вкл./выкл. автоматической откачки
 //          30/40									Auto_Produv_CheckBoxClick	вкл./выкл. автоматической продувки газовой линии
@@ -1644,12 +1647,36 @@ end;
 
 procedure Tfrmmain.servo2_buttonClick(Sender: TObject);						//задание положени€ сервопривода в градусах
 var
+x1,x2:integer;
 per:real;
 begin
+
 try
-	per:=strtofloat(servo2_edit.Text);										//считываем значение, которое хочет установить пользователь
-	if per>120 then per:=120;												//ограничиваем максимумом в 120 гардусов
-	if per<0 then per:=0;													//ограничиваем минимумом 0 градусов
+	per:=strtofloat(servo2_edit.Text);             //считываем значение, которое хочет установить пользователь
+  x1:=140+round(per*120/90);
+  x2:=140-round(per*120/90);
+	if per>85 then  begin
+   per:=85;												//ограничиваем максимумом в 85 гардусов
+   x1:=144;                       //координаты дл€ отрисовки крайнего положени€
+   x2:=136;                       //координаты дл€ отрисовки крайнего положени€
+  end;
+	if per<0 then  begin
+   per:=0;												//ограничиваем минимумом 0 градусов
+   x1:=144;                       //координаты дл€ отрисовки крайнего положени€
+   x2:=136;                       //координаты дл€ отрисовки крайнего положени€
+  end;
+  //-------------отрисовка---------------
+ image4.Canvas.pen.Width:=2;
+ image4.Canvas.Brush.Color:=RGB(240,240,240);
+ image4.Canvas.Pie(20,40,260,280,260,160,20,160);
+ image4.Canvas.Brush.Color:=RGB(177,187,187);
+ image4.Canvas.Pie(x2,40,x1,280,x1,160,x2,160);
+ image4.Canvas.MoveTo(140,40);
+ image4.Canvas.LineTo(140,160);
+ image4.Canvas.Brush.Color:=RGB(77,77,77);
+ image4.Canvas.Ellipse(120,100,160,140);
+//------------конец отрисовки------------
+
 	servo2_edit.text:=floattostr(per);										//выводим заданное значение на экран
 	per:=per/120*4379;														//перевод из градусов в 0..4379 м¬, значение подобрано
 	Dop_cmd:=round(per);													//и соответствует 0-960 дискрет дл€ сервоконтроллера
@@ -1818,6 +1845,12 @@ try
 except
 	showmessage('ќшибка ввода параметра');
 end;
+end;
+//---------------------------------------  нопка возврата в положение HOME------------------------------------------
+procedure Tfrmmain.shd_home_ButtonClick(Sender: TObject);
+begin
+  cmd_word:=58;
+  pagecontrol1.Enabled:=false;
 end;
 //---------------------------------------  нопка заврешение работы программы ѕЋ  -----------------------------------
 
@@ -2075,5 +2108,4 @@ except
 	showmessage('Ќе удалось считать значение');
 end;
 end;
-
 end.	{-------------------------------------------  онец программы ----------------------------------------------}

@@ -20,7 +20,7 @@ object frmmain: Tfrmmain
     Top = 0
     Width = 1298
     Height = 818
-    ActivePage = TabSheet1
+    ActivePage = TabSheet2
     TabOrder = 2
     OnChange = PageControl1Change
     object TabSheet1: TTabSheet
@@ -988,7 +988,7 @@ object frmmain: Tfrmmain
           end
           object Shd_move_Button: TButton
             Left = 142
-            Top = 28
+            Top = 44
             Width = 83
             Height = 25
             Caption = #1055#1077#1088#1077#1084#1077#1089#1090#1080#1090#1100
@@ -1468,6 +1468,15 @@ object frmmain: Tfrmmain
           Height = 21
           TabOrder = 4
         end
+      end
+      object Button7: TButton
+        Left = 784
+        Top = 584
+        Width = 75
+        Height = 25
+        Caption = 'HOME'
+        TabOrder = 3
+        OnClick = shd_home_ButtonClick
       end
     end
     object TabSheet3: TTabSheet
