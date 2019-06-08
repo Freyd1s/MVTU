@@ -278,8 +278,8 @@ acc_text[4]=">AL-",
 scan_init[13]=">RS>LL>SS0>AL",
 scan_speed[7]=">SD0>MV",
 scan_start[15]=">RS>JP5>JP2>FS>",
-home_text[18]="<LM>DR>SD100>HM>MV";
-home_first[33]="<LM>DR>SD100>HM>DL>MV120>DR>HM>MV";
+home_text[18]="<LM>DR>SD100>HM>MV",
+home_first[33]="<LM>DR>SD100>HM>DL>MV120>DR>HM>MV",
 home_command[34]="<LM>DR>SD100>HM>DL>MV120>DR>HM>FS>";
 
 //---------------------------------------- переменные для пультовой петли ------------
@@ -729,7 +729,7 @@ void server_update(void)
 	    smb_to_send=34;						//записываем в переменную итоговую длину буфера
 		SHd_position=0;					    //записываем текущую координату ШД
 		SHd_state=TRUE;								//записываем, что положение ШД определено	
-	    {
+	    }
 	break;
  //------------------------------- Команда №100 завершение работы программы ------------------------------  	
 	case 100:
@@ -1073,4 +1073,4 @@ void main(void)
 	ADAMTCP_ModServer_Release();						//завершение работы сервера TCP
 	com_deinstall();									//завершение работы COM-порта
 	Release_All();										//завершение работы программы
-}	
+}
